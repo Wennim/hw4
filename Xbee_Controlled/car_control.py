@@ -3,27 +3,27 @@ import serial
 import sys,tty,termios
 
 
-serdev = '/dev/ttyUSB0'
+serdev = '/dev/ttyUSB1'
 s = serial.Serial(serdev, 9600)
 
 
 while(1):
     input_position=str(input("Enter your position: ")).split(",")
-    print(input_position)
-
     
 
     if input_position[2]=="west" :
-        input_d2=str((float(input_position[1])+22)*3.35)
-        print(input_d2)
+        print("Start!\n")
+        input_d2=str((float(input_position[1])+16)*3.35)
+        
         command = "/goStraight/run -" + input_d2 + " \n"
-        print(command)
         s.write(command.encode())
         time.sleep(2)
+
         s.write("/stop/run \n".encode())
 
         s.write("/turn/run 100 0.1 \n".encode())
-        time.sleep(1.5)
+        time.sleep(1.65)
+
         s.write("/stop/run \n".encode())
 
         input_d1=str((float(input_position[0])+19)*3.35)
@@ -31,18 +31,19 @@ while(1):
         s.write(command.encode())
         time.sleep(2)
         s.write("/stop/run \n".encode())
+        print("Done!\n")
     
-    else :
+    elif input_position[2]=="east" :
+        print("Start!")
         input_d2=str((float(input_position[1])+6)*3.35)
-        print(input_d2)
+       
         command = "/goStraight/run -" + input_d2 + " \n"
-        print(command)
         s.write(command.encode())
         time.sleep(2)
         s.write("/stop/run \n".encode())
 
         s.write("/turn/run -100 0.1 \n".encode())
-        time.sleep(1.5)
+        time.sleep(1.3)
         s.write("/stop/run \n".encode())
 
         input_d1=str((float(input_position[0]))*3.35)
@@ -50,4 +51,16 @@ while(1):
         s.write(command.encode())
         time.sleep(2)
         s.write("/stop/run \n".encode())
+        print("Done!")
+
+
+    else :
+        print("Start!")
+        input_d2=str((float(input_position[1]))*3.35)
+
+        command = "/goStraight/run -" + input_d2 + " \n"
+        s.write(command.encode())
+        time.sleep(2)
+        s.write("/stop/run \n".encode())
+        print("Done!")
     
