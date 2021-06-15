@@ -9,7 +9,6 @@ BBCar car(pin5, pin6, servo_ticker);
 BufferedSerial pc(USBTX,USBRX); //tx,rx
 BufferedSerial uart(D1,D0); //tx,rx
 
-
 int main(){
     
    char buf[256], outbuf[256];
