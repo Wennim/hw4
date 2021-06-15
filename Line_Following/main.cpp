@@ -9,7 +9,6 @@ BBCar car(pin5, pin6, servo_ticker);
 BufferedSerial pc(USBTX,USBRX); //tx,rx
 BufferedSerial uart(D1,D0); //tx,rx
 
-void uart_camera();
 
 int main(){
     
